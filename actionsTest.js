@@ -13,31 +13,31 @@ class ActionTestPage {
         this.analyticsPage = new AnalyticsPage(this.testSelenium)
     }
    
-    async addClientTest() {
+    async addClientTest(firstName, lastName, country, owner, Email) {
         await this.actionsPage.navigateToActionsPage()
-        await this.actionsPage.addNewClient("Marty", "Mcfly", "England", "Leila Howe", "marty@mcfly.com")
+        await this.actionsPage.addNewClient(firstName, lastName, country, owner, Email)
         await this.homePage.goToClientsPage()
-        await this.clientsPage.searchAndValidateClient("marty@mcfly.com", "Email") // validation with the search method from the clients page
+        await this.clientsPage.searchAndValidateClient(Email, "Email") // validation with the search method from the clients page
     }
 
     async changeAndValidateMailType(){
         await this.actionsPage.navigateToActionsPage()
-        await this.actionsPage.changeEmailType("Marty Mcfly","Leila Howe", "B")
+        await this.actionsPage.changeEmailType(client, type)
         await this.clientsPage.navigateToClientsPage()
-        await this.actionsPage.validateEmailTypeChanged("Marty Mcfly")
+        await this.clientsPage.validateEmailTypeChanged(input)
     }
 
-    async soldToInvalidClient() {
+    async addNewClientAndValidateSold() {
         await this.actionsPage.navigateToActionsPage()
-        await this.actionsPage.soldToInvalidUser("== ==")
+        await this.actionsPage.addNewClientAndValidateSoldMessage(firstName, lastName, country, owner, Email)
         await this.clientsPage.navigateToClientsPage()
-        await this.clientsPage.searchAndValidateClient("=", "Email")
-        await this.actionsPage.validateSoldToInvalid()
+        await this.clientsPage.searchAndValidateClient(Email, "Email")
+        await this.clientsPage.validateSoldToClient()
 
     }
 }
 
 let actionTestPage = new ActionTestPage
-actionTestPage.addClientTest()
+actionTestPage.addClientTest("Marty", "Mcfly", "England", "Leila Howe", "marty@mcfly.com")
 // actionTestPage.changeAndValidateMailType()
-// actionTestPage.soldToInvalidClient()
+// actionTestPage.addNewClientAndValidateSold()

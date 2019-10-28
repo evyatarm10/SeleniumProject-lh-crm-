@@ -24,35 +24,37 @@ class ClientsPage {
                         console.log('the search client method has a problem' + error)
                 }
         }
+
         // this method check the functionality of the clients page
-        async deleteClientAndValidate(checkBy, text) { // delete client and check by pop-up then verify in the list with the search method
+        async deleteClientAndValidate(checkBy, input) { // delete client and check by pop-up then verify in the list with the search method
                 try {
                         await this.selenium.write(checkBy, "css", "#root > div > div.clients-component > div.search-clients > select")
-                        await this.selenium.write(text, "xpath", "//*[@id='root']/div/div[4]/div[1]/input")
+                        await this.selenium.write(input, "xpath", "//*[@id='root']/div/div[4]/div[1]/input")
                         await this.selenium.clickElement("xpath", '//*[@id="root"]/div/div[4]/table/tr[2]/th[4]')
                         await this.selenium.clickElement("className", "delete-client-popup-btn")
                         await this.selenium.sleep(500)
                         let deleteSuccess = await this.selenium.isElementExists("className", "success-pop-up")
-                                console.log(deleteSuccess)
+                        console.log(deleteSuccess)
                         if (deleteSuccess) {
                                 console.log(`the web page confirmed the delete action`)
                         } else {
-                                console.log(`${text} is still on the list try again`)
+                                console.log(`${input} is still on the list try again`)
                         }
                         await this.selenium.sleep(4000)
                         await this.selenium.clearElementField("css", "#root > div > div.clients-component > div.search-clients > input[type=text]") // clear the search client filed
                         await this.selenium.sleep(3000)
-                        await this.searchAndValidateClient("Marty", "Name") // second validation to ensure that client is no longer in the list
+                        await this.searchAndValidateClient(input, checkBy) // second validation to ensure that client is no longer in the list
 
                 } catch (error) {
-                        console.log('you have a problem with the delete method ' + error);
+                        console.log('you have a problem with the delete method ' + error)
                 }
         }
+
         // this method is for negative test case
-        async updateClientNameToInvalid(searchThe, inputText, newInput) { // update client name to invalid name and verify
+        async updateClientNameAndCheckPopup(searchBy, input, newInput) { // update client name to invalid name and verify
                 try {
-                        await this.selenium.write(searchThe, "css", "#root > div > div.clients-component > div.search-clients > select")
-                        await this.selenium.write(inputText, "xpath", "//*[@id='root']/div/div[4]/div[1]/input")
+                        await this.selenium.write(searchBy, "css", "#root > div > div.clients-component > div.search-clients > select")
+                        await this.selenium.write(input, "xpath", "//*[@id='root']/div/div[4]/div[1]/input")
                         await this.selenium.clickElement('xpath', '//*[@id="root"]/div/div[4]/table/tr[2]/th[4]')
                         await this.selenium.clearElementField("css", "#name")
                         await this.selenium.write(newInput, "css", "#name")
@@ -68,10 +70,34 @@ class ClientsPage {
                         await this.selenium.sleep(4000)
                         await this.selenium.clearElementField("xpath", "//*[@id='root']/div/div[4]/div[1]/input") //clear the search client filed
                         await this.selenium.sleep(3000)
-                        await this.searchAndValidateClient('====', "Name") // check if the invalid name appears on the list     
+                        await this.searchAndValidateClient(newInput, searchBy) // check if the invalid name appears on the list     
 
                 } catch (error) {
                         console.log('fix the update method ' + error)
+                }
+        }
+
+        // method to validate the Email has change
+        async validateEmailTypeChanged(input) {
+                await this.selenium.write(input, "xpath", "//input[@type = 'text']")
+
+                if (await this.selenium.getTextFromElement("css", "#root > div > div.clients-component > table > tr.clientDetails > th:nth-child(8)") === "A" || "B" || "C" || "D") {
+                        console.log('Email type has changed succssefuly')
+                } else {
+                        console.log('Email type not mach with the requested type')
+                }
+        }
+
+
+
+        async validateSoldToClient() { // validate that the sold changed to yes
+                await this.selenium.sleep(1000)
+                let sold = await this.selenium.getTextFromElement("css", "#root > div > div.clients-component > table > tr.clientDetails > th:nth-child(6)")
+
+                if (sold === "YES") {
+                        console.log("the client sold has changed to yes")
+                } else {
+                        console.log("the client sold didn't changed")
                 }
         }
 }

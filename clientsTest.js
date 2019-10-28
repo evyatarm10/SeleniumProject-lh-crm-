@@ -12,23 +12,23 @@ class ClientsPageTest {
 
     }
 
-    async searchClientTest() {
+    async searchClientTest(input, searchBy) {
         await this.homePage.goToClientsPage()
-        await this.clientsPage.searchAndValidateClient("eden@blgm.com", "Email")
+        await this.clientsPage.searchAndValidateClient(input, searchBy)
     }
 
-    async deleteClientTest() { 
+    async deleteClientTest(searchBy, input) {
         await this.clientsPage.navigateToClientsPage()
-        await this.clientsPage.deleteClientAndValidate("Name", "Marty")
+        await this.clientsPage.deleteClientAndValidate(searchBy, input)
     }
 
-    async updateClientTest() {
+    async updateClientTest(searchBy, input, newInput) {
         await this.homePage.goToClientsPage()
-        await this.clientsPage.updateClientNameToInvalid("Name", "Marty", "====")    
+        await this.clientsPage.updateClientNameAndCheckPopup(searchBy, input, newInput)
     }
 }
 
 let clientPageTest = new ClientsPageTest()
-// clientPageTest.searchClientTest()
-clientPageTest.deleteClientTest()
-// clientPageTest.updateClientTest()
+// clientPageTest.searchClientTest("marty@mcfly.com", "Email")
+clientPageTest.deleteClientTest("Name", "Evo")
+// clientPageTest.updateClientTest("Name", "Marty", "====")

@@ -23,13 +23,14 @@ class ActionsPage {
     }
 
     // method that change Email type
-    async changeEmailType(client,Owner, type) {
+    async changeEmailType(client, type) {
         try {
-            await this.selenium.write(client, "css", "#root > div > div.actions-container > div.update-container > table > div > input")
-            await this.selenium.write(Owner,'css', '#root > div > div.actions-container > div.update-container > table > table > tr.change-owner > th:nth-child(2) > input')
-            await this.selenium.write(type, "css", "#change-email-type > th:nth-child(2) > input")
-            await this.selenium.sleep(2000)
-            await this.selenium.clickElement('xpath', '//*[@id="change-email-type"]/th[3]/input')
+            await this.selenium.write(client, "xpath", "//input[@list = 'names']")
+            await this.selenium.write(type, "xpath", "//input[@list = 'emailType']")
+            await this.selenium.sleep(500)
+            await this.selenium.clickElement("xpath", "//div[text() = 'UPDATE']")
+            await this.selenium.sleep(1000)
+            await this.selenium.clickElement('xpath', "//input[@value = 'Send']")
             await this.selenium.sleep(1000)
 
         } catch (error) {
@@ -37,49 +38,29 @@ class ActionsPage {
         }
     }
 
-    // method to validate the Email has change
-    async validateEmailTypeChanged(input) {
-        await this.selenium.write(input, "xpath", "//*[@id='root']/div/div[4]/div[1]/input")
 
-        if (await this.selenium.getTextFromElement("css", "#root > div > div.clients-component > table > tr.clientDetails > th:nth-child(8)") ==="A" || "B" || "C" || "D") {
-            console.log('Email type has changed succssefuly')
-        } else {
-            console.log('Email type not mach with the requested type')
-        }
-    }
 
-    // method for negative test case 
-    async soldToInvalidUser(Name) { // change the sold option to  yes for invalid client
+    // method to add new client and update him to sold (this can be a negative case by adding an invalid client)
+    async addNewClientAndValidateSoldMessage(firstName, lastName, country, owner, Email) { // change the sold option to  yes for the client
         try {
-            await this.addNewClient("==", "==", "=", "=", "=")
+            await this.addNewClient(firstName, lastName, country, owner, Email)
             await this.selenium.sleep(3500)
-            await this.selenium.write(Name, "css", "#root > div > div.actions-container > div.update-container > table > div > input")
-            await this.selenium.sleep(1000)
-            await this.selenium.clickElement("xpath", '//*[@id="root"]/div/div[4]/div[1]/table/table/tr[3]/th[2]/input')
+            await this.selenium.write(firstName + " " + lastName, "xpath", "//input[@list = 'names']")
+            await this.selenium.clickElement("xpath", "//div[text() = 'UPDATE']")
+            await this.selenium.sleep(500)
+            await this.selenium.clickElement("xpath", "//input[@value = 'Sold']")
             await this.selenium.sleep(500)
             let popSoldBar = await this.selenium.isElementExists("xpath", "//th[text()='Sale was declared']")
 
-             if(popSoldBar) {
-                 console.log('the client approved the sold')
-             } else {
-                 console.log('you did not sold to the client')
-             }
+            if (popSoldBar) {
+                console.log('the client approved the sold')
+            }
+            if (await this.selenium.isElementExists("xpath", "//div[@class = 'error-pop-up']")) {
+                console.log('you did not sold to the client')
+            }
 
         } catch (error) {
-            console.log('check your negative method' + error);
-        }
-    }
-
-
-    async validateSoldToInvalid() { // validate that the sold changed to yes
-        await this.selenium.sleep(1000)
-        let sold = await this.selenium.getTextFromElement("css", "#root > div > div.clients-component > table > tr.clientDetails > th:nth-child(6)")
-
-        if(sold === "YES")
-        {
-            console.log(`how did you manage to sell somthing to invalid client?? he is no one!`)
-        } else {
-            console.log( 'we can\'t sell to no one!!')
+            console.log('check your negative method' + error)
         }
     }
 }
