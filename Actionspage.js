@@ -1,6 +1,7 @@
 class ActionsPage {
-    constructor(selenium) {
+    constructor(selenium, logger) {
         this.selenium = selenium
+        this.logger = logger
     }
 
     async navigateToActionsPage() {
@@ -19,6 +20,7 @@ class ActionsPage {
 
         } catch (error) {
             console.log('check your addnewuser method')
+            this.logger.error('check your addnewuser method')
         }
     }
 
@@ -35,6 +37,7 @@ class ActionsPage {
 
         } catch (error) {
             console.log('Email type method doesn\'t work')
+            this.logger.warn('Email type method doesn\'t work')
         }
     }
 
@@ -54,13 +57,17 @@ class ActionsPage {
 
             if (popSoldBar) {
                 console.log('the client approved the sold')
+                this.logger.info('the client approved the sold')
             }
             if (await this.selenium.isElementExists("xpath", "//div[@class = 'error-pop-up']")) {
                 console.log('you did not sold to the client')
+                this.logger.info('you did not sold to the client')
             }
 
         } catch (error) {
             console.log('check your negative method' + error)
+            this.logger.console.warn('check your negative method' + error)
+            
         }
     }
 }

@@ -1,7 +1,9 @@
 class HomePage {
-    constructor(selenium) {
+    constructor(selenium, logger) {
         this.selenium = selenium
+        this.logger = logger
     }
+    
     async navigateToHomePage() { 
         await this.selenium.getURL("https://lh-crm.herokuapp.com") // navigate directly to the chosen page
     }
@@ -20,6 +22,9 @@ class HomePage {
     async goToAnalyticsPage() {
         await this.navigateToHomePage()
         await this.selenium.clickElement("css", "#root > div > div.navbar > a:nth-child(2) > input")
+    }
+    async close(){
+        await this.selenium.close()
     }
 }
 

@@ -6,11 +6,13 @@ const AnalyticsPage = require("./AnalyticsPage")
 
 class AnalyticsPageTest {
     constructor() {
-        this.testSelenium = new BasePage().selenium
-        this.clientsPage = new ClientsPage(this.testSelenium)
-        this.actionsPage = new ActionsPage(this.testSelenium)
-        this.homePage = new HomePage(this.testSelenium)
-        this.analyticsPage = new AnalyticsPage(this.testSelenium)
+        this.Basepage = new BasePage()
+        this.testSelenium = this.Basepage.selenium
+        this.logger = this.Basepage.logger
+        this.clientsPage = new ClientsPage(this.testSelenium, this.logger)
+        this.actionsPage = new ActionsPage(this.testSelenium, this.logger)
+        this.homePage = new HomePage(this.testSelenium, this.logger)
+        this.analyticsPage = new AnalyticsPage(this.testSelenium, this.logger)
     }
 
     async updateEmailTypeAndCheck(client, type, input) {
@@ -25,9 +27,11 @@ class AnalyticsPageTest {
 
         if (emailCounter == emailcounterAfter - 1) {
             console.log("the email counter has been updated")
+            this.logger.info('the email counter has been updated')
 
         } else {
             console.log("the email counter didn't changed")
+            this.logger.info("the email counter didn't changed")
 
         }
     }
@@ -44,9 +48,11 @@ class AnalyticsPageTest {
 
         if (soldCounter == soldCounterAfter + 1) {
             console.log("the outstanding bar number has been updated")
+            this.logger.info("the outstanding bar number has been updated")
 
         } else {
             console.log("the counter didn't changed")
+            this.logger.info("the counter didn't changed")
         }
     }
 
@@ -54,6 +60,7 @@ class AnalyticsPageTest {
         for (let i = 0; i <= 10; i++) {
             await this.analyticsPage.navigateToAnalyticsPage()
             console.log("done stability test " + i)
+            this.logger.info("done stability test " + i)
         }
     }
 }

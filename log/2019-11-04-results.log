@@ -1,0 +1,11 @@
+[ClientsTest.js]: 2019-11-04 11:08:28 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-04 11:08:34 info: Evo is still on the list try again
+[ClientsTest.js]: 2019-11-04 11:08:42 info: couldn't get Evo!
+[ClientsTest.js]: 2019-11-04 16:43:24 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-04 16:43:30 info: Real is still on the list try again
+[ClientsTest.js]: 2019-11-04 16:43:39 info: couldn't get Real!
+[ActionsTest.js]: 2019-11-04 16:44:53 info: your client's Email is marty@mcfly.com
+[ActionsTest.js]: 2019-11-04 16:44:57 info: Email type has changed succssefuly
+[ActionsTest.js]: 2019-11-04 16:45:04 info: the client approved the sold
+[ActionsTest.js]: 2019-11-04 16:45:06 info: your client's Email is Realmadid@campeones
+[ActionsTest.js]: 2019-11-04 16:45:07 info: the client sold has changed to yes

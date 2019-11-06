@@ -5,19 +5,23 @@ const ActionsPage = require("./Actionspage")
 
 class ClientsPageTest {
     constructor() {
-        this.testSelenium = new BasePage().selenium
-        this.clientsPage = new ClientsPage(this.testSelenium)
-        this.homePage = new HomePage(this.testSelenium)
-        this.actionsPage = new ActionsPage(this.testSelenium)
-
+        this.Basepage = new BasePage()
+        this.testSelenium = this.Basepage.selenium
+        this.logger = this.Basepage.logger
+        this.clientsPage = new ClientsPage(this.testSelenium, this.logger)
+        this.homePage = new HomePage(this.testSelenium, this.logger)
+        this.actionsPage = new ActionsPage(this.testSelenium, this.logger)
+        
     }
 
     async searchClientTest(input, searchBy) {
+        this.logger.info("Starting searchClientTest : ")
         await this.homePage.goToClientsPage()
         await this.clientsPage.searchAndValidateClient(input, searchBy)
     }
 
     async deleteClientTest(searchBy, input) {
+        this.logger.info("deleteClientTest is starting :")
         await this.clientsPage.navigateToClientsPage()
         await this.clientsPage.deleteClientAndValidate(searchBy, input)
     }
@@ -30,5 +34,5 @@ class ClientsPageTest {
 
 let clientPageTest = new ClientsPageTest()
 // clientPageTest.searchClientTest("marty@mcfly.com", "Email")
-clientPageTest.deleteClientTest("Name", "Evo")
+clientPageTest.deleteClientTest("Name", "Real")
 // clientPageTest.updateClientTest("Name", "Marty", "====")

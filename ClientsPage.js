@@ -1,6 +1,7 @@
 class ClientsPage {
-        constructor(selenium) {
+        constructor(selenium, logger) {
                 this.selenium = selenium
+                this.logger = logger
         }
 
         async navigateToClientsPage() {
@@ -17,11 +18,14 @@ class ClientsPage {
                         let email = await this.selenium.getTextFromElement("xpath", '//*[@id="root"]/div/div[4]/table/tr[2]/th[4]')
                         if (name === input || email === input) {
                                 console.log(`your client\'s ${searchBy} is ${input}`)
+                                this.logger.info(`your client\'s ${searchBy} is ${input}`)
                         } else {
                                 console.log(`couldn't get ${input}!`)
+                                this.logger.info(`couldn't get ${input}!`)
                         }
                 } catch (error) {
                         console.log('the search client method has a problem' + error)
+                        this.logger.error('the search client method has a problem' + error)
                 }
         }
 
@@ -37,8 +41,10 @@ class ClientsPage {
                         console.log(deleteSuccess)
                         if (deleteSuccess) {
                                 console.log(`the web page confirmed the delete action`)
+                                this.logger.info(`the web page confirmed the delete action`)
                         } else {
                                 console.log(`${input} is still on the list try again`)
+                                this.logger.info(`${input} is still on the list try again`)
                         }
                         await this.selenium.sleep(4000)
                         await this.selenium.clearElementField("css", "#root > div > div.clients-component > div.search-clients > input[type=text]") // clear the search client filed
@@ -47,6 +53,7 @@ class ClientsPage {
 
                 } catch (error) {
                         console.log('you have a problem with the delete method ' + error)
+                        this.logger.error('you have a problem with the delete method ' + error)
                 }
         }
 
@@ -64,8 +71,10 @@ class ClientsPage {
 
                         if (updateSuccess) {
                                 console.log(`there is no way that client name is ${newInput}`)
+                                this.logger.info(`there is no way that client name is ${newInput}`)
                         } else {
                                 console.log('the client stay\'s normal')
+                                this.logger.info('the client stay\'s normal')
                         }
                         await this.selenium.sleep(4000)
                         await this.selenium.clearElementField("xpath", "//*[@id='root']/div/div[4]/div[1]/input") //clear the search client filed
@@ -74,17 +83,21 @@ class ClientsPage {
 
                 } catch (error) {
                         console.log('fix the update method ' + error)
+                        this.logger.error('fix the update method ' + error)
                 }
         }
 
         // method to validate the Email has change
         async validateEmailTypeChanged(input) {
+                await this.selenium.sleep(800)
                 await this.selenium.write(input, "xpath", "//input[@type = 'text']")
 
                 if (await this.selenium.getTextFromElement("css", "#root > div > div.clients-component > table > tr.clientDetails > th:nth-child(8)") === "A" || "B" || "C" || "D") {
                         console.log('Email type has changed succssefuly')
+                        this.logger.info('Email type has changed succssefuly')
                 } else {
                         console.log('Email type not mach with the requested type')
+                        this.logger.info('Email type not mach with the requested type')
                 }
         }
 
@@ -96,8 +109,10 @@ class ClientsPage {
 
                 if (sold === "YES") {
                         console.log("the client sold has changed to yes")
+                        this.logger.info("the client sold has changed to yes")
                 } else {
                         console.log("the client sold didn't changed")
+                        this.logger.info("the client sold didn't changed")
                 }
         }
 }

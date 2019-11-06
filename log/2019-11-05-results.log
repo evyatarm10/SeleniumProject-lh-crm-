@@ -1,0 +1,38 @@
+[AnalyticsTest.js]: 2019-11-05 12:51:38 info: 379
+[AnalyticsTest.js]: 2019-11-05 12:51:57 info: Email type has changed succssefuly
+[ActionsTest.js]: 2019-11-05 12:52:11 info: your client's Email is marty@mcfly.com
+[ActionsTest.js]: 2019-11-05 12:52:16 info: Email type has changed succssefuly
+[ActionsTest.js]: 2019-11-05 12:52:21 info: the client approved the sold
+[ActionsTest.js]: 2019-11-05 12:52:24 info: your client's Email is Realmadid@campeones
+[ActionsTest.js]: 2019-11-05 12:52:25 info: the client sold has changed to yes
+[ClientsTest.js]: 2019-11-05 12:53:41 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-05 12:53:46 info: the web page confirmed the delete action
+[ClientsTest.js]: 2019-11-05 12:53:55 info: your client's Name is Marty
+[ClientsTest.js]: 2019-11-05 12:55:01 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-05 12:55:07 info: the web page confirmed the delete action
+[ClientsTest.js]: 2019-11-05 12:55:16 info: your client's Name is Marty
+[ClientsTest.js]: 2019-11-05 12:57:53 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-05 12:58:00 info: the web page confirmed the delete action
+[ClientsTest.js]: 2019-11-05 12:58:08 info: your client's Name is Marty
+[ClientsTest.js]: 2019-11-05 13:04:09 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-05 13:04:16 info: the web page confirmed the delete action
+[ClientsTest.js]: 2019-11-05 13:04:24 info: your client's Name is Marty
+[ClientsTest.js]: 2019-11-05 14:58:10 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-05 14:58:16 info: the web page confirmed the delete action
+[ClientsTest.js]: 2019-11-05 14:58:24 info: your client's Name is Marty
+[ClientsTest.js]: 2019-11-05 16:11:03 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-05 16:11:10 info: Marty is still on the list try again
+[ClientsTest.js]: 2019-11-05 16:11:19 info: your client's Name is Marty
+[AnalyticsTest.js]: 2019-11-05 17:21:48 info: 379
+[AnalyticsTest.js]: 2019-11-05 17:21:55 info: Email type has changed succssefuly
+[AnalyticsTest.js]: 2019-11-05 17:21:57 info: 379
+[AnalyticsTest.js]: 2019-11-05 17:21:58 info: the email counter didn't changed
+[ClientsTest.js]: 2019-11-05 17:25:56 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-05 17:26:02 info: the web page confirmed the delete action
+[ClientsTest.js]: 2019-11-05 17:26:10 info: your client's Name is Marty
+[ClientsTest.js]: 2019-11-05 21:25:06 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-05 21:25:32 info: the web page confirmed the delete action
+[ClientsTest.js]: 2019-11-05 21:25:41 info: your client's Name is Marty
+[ClientsTest.js]: 2019-11-05 22:54:05 info: deleteClientTest is starting :
+[ClientsTest.js]: 2019-11-05 22:54:17 info: the web page confirmed the delete action
+[ClientsTest.js]: 2019-11-05 22:54:26 info: your client's Name is Marty
